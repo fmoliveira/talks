@@ -1,0 +1,230 @@
+<Header title="Boas Práticas Cypress" date="16 de setembro de 2020" />
+
+<SlidePage>
+    
+<Cover>
+
+# Boas Práticas Cypress
+
+Como escrever testes E2E sem que o processo se torne muito repetitivo ou custoso
+
+</Cover>
+
+---
+
+## Problemas Comuns
+
+<img src="/images/flaky-test-or-broken-code.png" alt="" />
+
+---
+
+### Seletores muito voláteis
+
+❌ Nomes de classe são detalhes de implementação
+
+🤯 Equipe do Cypress não recomenda usar textos como seletores, diferente do RTL
+
+---
+
+### Código muito repetitivo
+
+😫 Testes começam a ficar gigantes
+
+😪 Difícil de ler e manter os testes mais antigos
+
+---
+
+### Refatorar pra quê?
+
+😨 Pergunte isso novamente daqui um ano...
+
+🧹 Tarefas sempre devem ter uma margem de tempo generosa para refatoração
+
+---
+
+### Testes lentos
+
+🐌 Acessar tela de login com frequência
+
+⏳ Usar a UI constantemente para gerar dados de teste
+
+---
+
+### Cenários difíceis de testar
+
+✉ Envio de email
+
+💭 Login social
+
+🎲 Backend com microserviços
+
+---
+
+## Boas Práticas
+
+Felizmente, o Cypress investe muito em educação!
+
+Boas práticas são amplamente documentadas no site oficial e com tech talks que podemos encontrar no YouTube.
+
+---
+
+### Seletores
+
+<img src="/images/cy-best-selectors.png" alt="" />
+
+[fmoliveira.link/cy-best](https://fmoliveira.link/cy-best)
+
+---
+
+### Seletores
+
+✅ API do Cypress recomenda usar test-id's
+
+✅ API do RTL recomenda usar textos como seletores
+
+<img src="/images/choose-wisely.png" alt="" />
+
+---
+
+### Testing Library
+
+🐙
+
+---
+
+### Testing Library
+
+```js
+cy.findByTestId('menu').click() // vs cy.get('[data-testid=menu]').click()
+
+cy.findByRole('button', { name: /Jackie Chan/i }).click()
+cy.findByRole('button', { name: /Button Text/i }).should('exist')
+cy.findByRole('button', { name: /Non-existing Button Text/i }).should(
+  'not.exist'
+)
+cy.findByLabelText(/Label text/i, { timeout: 7000 }).should('exist')
+```
+
+[fmoliveira.link/cy-rtl](https://fmoliveira.link/cy-rtl)
+
+---
+
+### Abstração e Reuso
+
+🌍 Custom Commands para reuso global, como: login, dropdowns, navegação
+
+⚡ Utility Functions para reuso local, é mais simples e evita poluir o global
+
+[fmoliveira.link/cy-commands](https://fmoliveira.link/cy-commands)
+
+---
+
+### Fixtures
+
+```js
+// importe o conteúdo de uma fixture
+cy.fixture('users').then((json) => {
+  cy.route('GET', '/users/**', json)
+})
+
+// use um alias, que também importa o conteúdo
+cy.fixture('users').as('usersJSON')
+cy.route('GET', '/users/**', '@usersJSON')
+this.usersJSON // alias disponível em "this"
+
+// atalhos recomendados para stubbing
+cy.route('GET', '/users/**', 'fixture:users')
+cy.route('GET', '/users/**', 'fx:users')
+```
+
+---
+
+### Escreva Testes Rápidos
+
+💡 Pegue atalhos, nem sempre isso é trapaça
+
+🔒 Login quase sempre pode ser melhorado
+
+⛳ Feature flags definidas com stubs
+
+🗃 Gere massa de dados de teste pela API
+
+⚖ Equilíbrio entre full-E2E e fixtures
+
+---
+
+### Headless Login
+
+🔒 Tenha uma suíte full-E2E para o login
+
+💬 Custom command para facilitar reuso
+
+❌ Não repita o login full-E2E no app todo
+
+🏍 Faça login direto pela API
+
+🕵️‍♀️ Armazene o token no Cypress.env
+
+---
+
+### Watch Mode
+
+⚡ Inicie o watch mode com `cypress open`
+
+👀 Mantenha o watch mode aberto durante o dia
+
+⏲ Tenha feedback em tempo real
+
+---
+
+### Build Diária Agendada
+
+🌞 Agende uma build todo dia de manhã
+
+💬 Poste o resultado no Slack/Discord do time
+
+---
+
+### Testes Visuais de Regressão
+
+❌ Não tente testar CSS com RTL ou Cypress
+
+😃 Use uma ferramenta apropriada
+
+🧰 Cypress: Percy, Applitools Eyes
+
+⚙ Storybook: Chromatic
+
+---
+
+### Fluxos com Envio de Email
+
+✅ Endereço de email com acesso via API
+
+📮 [mailosaur.com](https://mailosaur.com)
+
+📮 [mailtrap.io](https://mailtrap.io)
+
+📮 [mailslurp.com](https://mailslurp.com)
+
+---
+
+### Login Social
+
+❌ Cypress não permite acessar popups
+
+😃 Use o puppeteer para cuidar disto
+
+🕵️‍♀️ Lembre-se de guardar o token no Cypress.env
+
+[npm.im/cypress-social-logins](http://npm.im/cypress-social-logins)
+
+---
+
+### Obrigado!
+
+Siga-me no Twitter:
+
+[@tfmoliveira](https://twitter.com/tfmoliveira)
+
+</SlidePage>
