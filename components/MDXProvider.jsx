@@ -3,6 +3,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import okaidia from 'react-syntax-highlighter/dist/cjs/styles/prism/okaidia'
 import SlidePage from '../layouts/SlidePage'
+import Header from './Header'
 import Cover from './Cover'
 import SpeakerNotes from './SpeakerNotes'
 
@@ -21,6 +22,7 @@ const mdComponents = {
       />
     )
   },
+  Header,
   Cover,
   SlidePage,
   SpeakerNotes,

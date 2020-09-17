@@ -1,11 +1,6 @@
-import React, { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import React from 'react'
 
 export default function index() {
-  const router = useRouter()
-
-  useEffect(() => {
-    router.replace('/slides/1')
-  })
+  // TODO: display list of talks sorted by date
   return <div />
 }
