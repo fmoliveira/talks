@@ -1,7 +1,7 @@
 {
-  "name": "next-mdx-deck",
-  "version": "0.1.0",
-  "description": "Presentation decks using MDX, React, and Next.JS",
+  "name": "talks",
+  "version": "2020",
+  "description": "Talks by Filipe Oliveira",
   "private": true,
   "scripts": {
     "dev": "next dev",
