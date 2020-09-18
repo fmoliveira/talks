@@ -52,6 +52,11 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--bg);
   }
 
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
   #slide {
     display: flex;
     overflow: hidden;
